@@ -187,19 +187,13 @@ Using Redis as a caching mechanism to store the last location data of each perso
 
 This method is efficient because Redis is an in-memory data store and it provides faster read and write operations. However, it requires additional setup and maintenance of the Redis server.
 
-### 3. Using Django Signals
-
-Using Django Signals to update the last location data of each person whenever a new location data is added to the LocationRecord table. This way, we can query the LastLocationRecord table to get the last location data of each person without querying the LocationRecord table.
-
-This method is efficient because it uses Django's built-in signal mechanism to update the last location data of each person. However, it requires additional cpu and memory usage.
-
-### 4. Using Django's cache framework
+### 3. Using Django's cache framework
 
 Using Django's cache framework to store the last location data of each person. When a new location data is added to the LocationRecord table, we can update the cache with the new data. This way, we can query the cache to get the last location data of each person without querying the LocationRecord table.
 
 This method is efficient because Django's cache framework provides a simple and efficient way to store and retrieve data. However, it requires additional memory usage.
 
-### 5. Using a separate table to store the last location data of each person
+### 4. Using a separate table to store the last 12 hours location data of each person
 
 Creating a new table called "LastLocationRecord" to store the last location data of each person. This table will be updated every time a new location data is added to the LocationRecord table. This way, we can query the LastLocationRecord table to get the last location data of each person without querying the LocationRecord table.
 
@@ -207,8 +201,42 @@ This method is efficient because it reduces the number of queries to the Locatio
 
 This can be done using triggers, procedures, or functions in the database.
 
-### 6. Using distributed database such as Amazon Aurora or Google Cloud Spanner (Recommended)
+### 5. Using distributed database such as Amazon Aurora or Google Cloud Spanner (Recommended but requires experience)
 
 Using a distributed database such as Amazon Aurora or Google Cloud Spanner to store the last location data of each person. This way, we can query the distributed database to get the last location data of each person without querying the LocationRecord table.
 
 This method is efficient because distributed databases provide faster read and write operations. However, it requires additional setup and maintenance of the distributed database.
+
+### 6. Indexing the LocationRecord table (Recommended)
+
+Creating indexes on the LocationRecord table to improve the performance of the queries. This way, we can query the LocationRecord table more efficiently.
+
+This method is efficient because indexing improves the performance of the queries. However, it requires additional storage space and it increases the complexity of the system.
+
+### 9. Database Views and Materialized Views (Recommended)
+
+Creating database views and materialized views to store the last location data of each person. This way, we can query the views to get the last location data of each person without querying the LocationRecord table.
+
+This method is efficient because views and materialized views provide a way to store and retrieve data without querying the LocationRecord table. However, it requires additional setup and maintenance of the views.
+
+### 10. Asynchronous Processing
+
+Using asynchronous processing to update the last location data of each person whenever a new location data is added to the LocationRecord table. This way, we can update the last location data of each person in the background without affecting the performance of the system.
+
+This method is efficient because it uses asynchronous processing to update the last location data of each person. However, it requires additional setup and maintenance of the asynchronous processing system.
+
+### 11. Using a NoSQL database such as MongoDB or Cassandra (Recommended)
+
+Using a NoSQL database such as MongoDB or Cassandra to store the last location data of each person.
+
+This method is efficient because NoSQL databases provide faster read and write operations. However, it requires additional setup and maintenance of the NoSQL database. Also, it changes the data structure and query language.
+
+### 12. Changing the DB Structure to the Thread-based Structure (Recommended but requires experience)
+
+Changing the database structure to a thread-based structure to store the last location data of each person. This way, we can query the thread-based structure with multiple threads to get the last location data of each person without blocking the system.
+
+This method is efficient because it uses multiple threads to query the thread-based structure. However, it requires additional setup and maintenance of the thread-based structure. Also, it depends on the experience of the developer.
+
+### 13. Changing the System Architecture to Use WebSockets (Recommended)
+
+Changing the system architecture as whenever a new location data is added to the LocationRecord table, we can send new data to the connected clients via WebSockets. This way, we can update the connected clients with the new data in real-time.
