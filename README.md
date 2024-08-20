@@ -237,6 +237,28 @@ Changing the database structure to a thread-based structure to store the last lo
 
 This method is efficient because it uses multiple threads to query the thread-based structure. However, it requires additional setup and maintenance of the thread-based structure. Also, it depends on the experience of the developer.
 
+#### Managing a Non-Thread-Safe Database
+
+To safely use a non-thread-safe database, you can employ various strategies:
+
+- Single-Threaded Applications: Restrict the application to a single-threaded model where the database is accessed sequentially.
+
+- Application-Level Locking: Implement locking mechanisms at the application level to control database access. This can involve mutexes, semaphores, or other synchronization techniques to ensure that only one thread interacts with the database at a time.
+
+- Queueing Requests: Use a queuing system where database requests are serialized, processed one at a time, thereby avoiding direct concurrent access.
+
+- Proxy or Middleware: Employ a middleware layer that can manage access to the database, ensuring that calls are handled in a thread-safe manner even if the database itself is not thread-safe.
+
+#### Risks and Considerations
+
+- Data Integrity: Without proper handling, using a non-thread-safe database can lead to data corruption, loss, or duplication, especially under concurrent access scenarios.
+
+- Scalability: As application load increases, a non-thread-safe database might become a bottleneck, unable to efficiently handle increased traffic or parallel processing requirements.
+
+- Complexity in Management: While the database itself may be simpler, managing access to it can introduce additional complexity into the application architecture, possibly negating the benefits of using a simpler database system.
+
 ### 13. Changing the System Architecture to Use WebSockets (Recommended)
 
 Changing the system architecture as whenever a new location data is added to the LocationRecord table, we can send new data to the connected clients via WebSockets. This way, we can update the connected clients with the new data in real-time.
+
+This method is efficient because it uses WebSockets to update the connected clients with the new data in real-time.
