@@ -56,7 +56,7 @@ class Command(BaseCommand):
                 f'Fetching location data for person ID {person_id}...'
             ))
         time_start = now()
-        results = self.get_locations_for_person(person_id, day)
+        results = self.get_locations_for_person(person_id, day, verbose)
         time_passed = now() - time_start
 
         if verbose:
@@ -69,6 +69,7 @@ class Command(BaseCommand):
                     'No records found for the specified person in the last 12 hours.'
                 )
             )
+            return
 
         first_record = results[0]
         last_record = results[-1]
@@ -82,19 +83,40 @@ class Command(BaseCommand):
 
         for result in results:
             result['datetime'] = result['datetime'].strftime('%d.%m.%Y %H:%M:%S')
-            self.stdout.write(f"{result}")
 
-    def get_locations_for_person(self, person_id: int, day: int):
+        self.stdout.write(f"{results}")
+
+    def get_locations_for_person(self, person_id: int, day: int, verbose: bool = False):
         if day == 0:
             twelve_hours_ago = now() - timedelta(hours=12)
-        else:
-            twelve_hours_ago = now() - timedelta(days=day)
 
-        locations = LocationRecord.objects.filter(
-            people_id=person_id,
-            datetime__gte=twelve_hours_ago
-        ).order_by('-datetime').values(
-            'id', 'latitude', 'longitude', 'datetime'
-        )
+            if verbose:
+                self.stdout.write(self.style.SUCCESS(
+                    f'Start time: {now()}, End time: {twelve_hours_ago} | Difference: {now() - twelve_hours_ago}'
+                ))
+
+            locations = LocationRecord.objects.filter(
+                people_id=person_id,
+                datetime__gte=twelve_hours_ago
+            ).order_by('-datetime').values(
+                'id', 'latitude', 'longitude', 'datetime'
+            )
+        else:
+            range_time_start = now() - timedelta(days=day)
+            range_time_end = range_time_start - timedelta(hours=12)
+
+            if verbose:
+                self.stdout.write(self.style.SUCCESS(
+                    f'Start time: {range_time_start}, End time: {range_time_end} | Difference: {range_time_start - range_time_end}'
+                ))
+
+            locations = LocationRecord.objects.filter(
+                people_id=person_id,
+                # datetime__lte=range_time_start,
+                # datetime__gte=range_time_end
+                datetime__range=[range_time_end, range_time_start]
+            ).order_by('-datetime').values(
+                'id', 'latitude', 'longitude', 'datetime'
+            )
 
         return list(locations)
