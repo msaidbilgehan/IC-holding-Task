@@ -65,17 +65,11 @@ This design effectively separates concerns by distinguishing between ongoing tas
 The structure supports calculating the frequency of task completions by utilizing the `TaskCompletionLog`. The linkage via `task_assignment_id` allows to aggregate completion data directly back to both the specific task and person involved without ambiguity.
 
 ```sql
-SELECT
-    TA.person_id,
-    TA.task_id,
-    COUNT(TCL.id) AS completion_count,
-    AVG(TIMESTAMPDIFF(MONTH, TCL.time_start, TCL.time_completed)) AS average_completion_time
-FROM
-    TaskAssignment TA
-JOIN
-    TaskCompletionLog TCL ON TA.id = TCL.task_assignment_id
-WHERE
-    TCL.time_completed BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()
-GROUP BY
-    TA.person_id, TA.task_id;
+SELECT management_taskassignment.person_id, management_taskassignment.task_id,
+COUNT(management_taskcompletionlog.id) AS frequency
+FROM management_taskcompletionlog
+INNER JOIN management_taskassignment ON (management_taskcompletionlog.task_assignment_id = management_taskassignment.id)
+WHERE management_taskcompletionlog.time_completed >= "2024-08-20 12:58:32.173657"
+GROUP BY management_taskassignment.person_id, management_taskassignment.task_id
+ORDER BY management_taskassignment.person_id ASC, management_taskassignment.task_id ASC
 ```

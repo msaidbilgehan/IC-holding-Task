@@ -1,5 +1,5 @@
 """
-URL configuration for Question_2 project.
+URL configuration for project_q2 project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
