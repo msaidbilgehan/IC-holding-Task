@@ -33,7 +33,7 @@ class Command(BaseCommand):
                     )
             else:
                 self.stdout.write(
-                    f"{frequencies}"
+                    f"{list(frequencies)}"
                 )
         else:
             self.stdout.write("No task completions found in the specified range.")

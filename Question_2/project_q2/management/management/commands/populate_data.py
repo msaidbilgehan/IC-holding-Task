@@ -22,6 +22,9 @@ class Command(BaseCommand):
                 first_name=f'Alfa{i}',
                 last_name=f'Theta{i}'
             )
+            self.stdout.write(self.style.SUCCESS(
+                f'Created Person - {i}'
+            ))
 
         # Create Tasks
         number_of_tasks = 5
@@ -30,6 +33,9 @@ class Command(BaseCommand):
                 title=f'Task{i}',
                 description=f'Description of Task{i}'
             )
+            self.stdout.write(self.style.SUCCESS(
+                f'Created Task - {i}'
+            ))
 
         # Create TaskAssignments
         number_of_assignments = 10
@@ -39,6 +45,9 @@ class Command(BaseCommand):
                     # To randomize the task assignment
                     if random.randint(1, 5) != 1:
                         TaskAssignment.objects.create(person=person, task=task)
+                        self.stdout.write(self.style.SUCCESS(
+                            f'Assigned Task - {task.title} to {person.first_name} {person.last_name}'
+                        ))
 
         # Create TaskCompletionLogs
         for assignment in TaskAssignment.objects.all():
@@ -48,6 +57,10 @@ class Command(BaseCommand):
                 time_start=completion_date,
                 time_completed=completion_date + timezone.timedelta(hours=random.randint(1, 7))
             )
+
+            self.stdout.write(self.style.SUCCESS(
+                f'Tasks completed by {assignment.person.first_name} {assignment.person.last_name} for {assignment.task.title}'
+            ))
 
         self.stdout.write(self.style.SUCCESS(
             'Successfully seeded the database.'

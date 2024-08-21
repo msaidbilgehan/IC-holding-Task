@@ -20,7 +20,7 @@ We also want you to suggest a different method to get this data in a more effici
 
 For this task, you must deliver the aforementioned function and given models within a zip file to get the data in a more efficient way, if any. An explanatory document about your ideas or suggestions is more than welcome.
 
-## Install & Dependence
+## Installation & Dependencies
 
 Before running the project, make sure you have the python 3.11.9 installed as virtual environment.
 
