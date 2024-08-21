@@ -219,19 +219,13 @@ Creating database views and materialized views to store the last location data o
 
 This method is efficient because views and materialized views provide a way to store and retrieve data without querying the LocationRecord table. However, it requires additional setup and maintenance of the views.
 
-### 10. Asynchronous Processing
-
-Using asynchronous processing to update the last location data of each person whenever a new location data is added to the LocationRecord table. This way, we can update the last location data of each person in the background without affecting the performance of the system.
-
-This method is efficient because it uses asynchronous processing to update the last location data of each person. However, it requires additional setup and maintenance of the asynchronous processing system.
-
-### 11. Using a NoSQL database such as MongoDB or Cassandra (Recommended)
+### 10. Using a NoSQL database such as MongoDB or Cassandra (Recommended)
 
 Using a NoSQL database such as MongoDB or Cassandra to store the last location data of each person.
 
 This method is efficient because NoSQL databases provide faster read and write operations. However, it requires additional setup and maintenance of the NoSQL database. Also, it changes the data structure and query language.
 
-### 12. Changing the DB Structure to the Thread-based Structure (Recommended but requires experience)
+### 11. Changing the DB Structure to the Thread-based Structure (Recommended but requires experience)
 
 Changing the database structure to a thread-based structure to store the last location data of each person. This way, we can query the thread-based structure with multiple threads to get the last location data of each person without blocking the system.
 
@@ -257,7 +251,7 @@ To safely use a non-thread-safe database, you can employ various strategies:
 
 - Complexity in Management: While the database itself may be simpler, managing access to it can introduce additional complexity into the application architecture, possibly negating the benefits of using a simpler database system.
 
-### 13. Changing the System Architecture to Use WebSockets (Recommended)
+### 12. Changing the System Architecture to Use WebSockets (Recommended)
 
 Changing the system architecture as whenever a new location data is added to the LocationRecord table, we can send new data to the connected clients via WebSockets. This way, we can update the connected clients with the new data in real-time.
 
