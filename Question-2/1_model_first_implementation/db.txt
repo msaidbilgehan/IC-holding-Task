@@ -1,0 +1,16 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table Person {
+  id int [pk, increment] // auto-increment
+  first_name varchar [not null]
+  last_name varchar [not null]
+}
+
+Table Task {
+  id int [pk, increment] // auto-increment
+  title varchar [not null]
+  description text
+}
+

@@ -1,0 +1,27 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table Person {
+  id int [pk, increment] // auto-increment
+  first_name varchar [not null]
+  last_name varchar [not null]
+}
+
+Table Task {
+  id int [pk, increment] // auto-increment
+  title varchar [not null]
+  description text
+}
+
+Table TaskAssignment {
+  id int [pk, increment] // auto-increment
+  task_id int [not null]
+  person_id int [not null]
+  frequency int [not null]
+  last_completed timestamp [not null]
+}
+
+// Creating references
+Ref: Person.id < TaskAssignment.person_id
+Ref: Task.id < TaskAssignment.task_id
