@@ -1,12 +1,4 @@
-# Title
-
-Abstract:xxx
-
-## Information
-
-The project created to accomplish the job application of the "IC Holding".
-
-## Task Description by IC Holding
+# Q1 - API Implementation, Query Optimization and Improvement
 
 LocationRecord
 
@@ -27,39 +19,6 @@ Using the models above, we want you to create a function that returns the list o
 We also want you to suggest a different method to get this data in a more efficient way. For example, you can suggest a tool, architecture, or model structure change.
 
 For this task, you must deliver the aforementioned function and given models within a zip file to get the data in a more efficient way, if any. An explanatory document about your ideas or suggestions is more than welcome.
-
-## Directory Hierarchy
-
-``` bash
-|—— .gitignore
-|—— README.md
-|—— location_tracking
-|    |—— db.sqlite3 (will be created after running the migrate command)
-|    |—— location_tracking
-|        |—— __init__.py
-|        |—— asgi.py
-|        |—— settings.py
-|        |—— urls.py
-|        |—— wsgi.py
-|    |—— manage.py
-|    |—— tracking
-|        |—— __init__.py
-|        |—— admin.py
-|        |—— apps.py
-|        |—— management
-|            |—— commands
-|                |—— __init__.py
-|                |—— populate_data.py
-|                |—— show_last.py
-|                |—— show_last_12_h.py
-|        |—— migrations
-|            |—— 0001_initial.py
-|            |—— __init__.py
-|        |—— models.py
-|        |—— tests.py
-|        |—— views.py
-
-```
 
 ## Install & Dependence
 
